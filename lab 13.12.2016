@@ -1,0 +1,107 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void czytaj_n(int *n);
+void czytaj_tab(int *t, int n);
+void drukuj_tab(int *t, int n);
+int minimum(int *t, int n);
+int maximum(int *t, int n);
+double srednia(int *t, int n);
+int *czytaj_do_0(int *n);
+
+void main()
+{
+	int *tab = NULL, n, m;
+	double sr;
+	char z;
+	while(1)
+	{
+		printf("\n c - czytaj tablice n elem\nd - drukuj tablice\n");
+		printf("\n m - maximum\n n - minimum\n");
+		printf("\n s - srednia\n x - czytaj do 0\n");
+		printf("\n q - wyjscie\n inny - bledny\n");
+		printf("Twoj wybor: ");
+		fflush(stdin);
+		scanf("%c",&z);
+		switch(z)
+		{
+		case 'c':
+			czytaj_n(&n);
+			tab = (int*) malloc(n*sizeof(int));
+			czytaj_tab(tab, n);
+			break;
+		case 'd':
+			if(tab == NULL)
+				printf("Tablica pusta\n");
+			else 
+				drukuj_tab(tab, n);
+			break;
+		case 'm':
+			if(tab == NULL)
+				printf("Tablica pusta\n");
+			else 
+			{
+			m = maximum(tab, n);
+			printf("Maximum = %d \n", m);
+			}
+			break;
+		case 'n':
+			if(tab == NULL)
+				printf("Tablica pusta\n");
+			else 
+			{
+			m = minimum(tab, n);
+			printf("Minimum = %d \n", m);
+			}
+			break;
+		case 's':
+			if(tab == NULL)
+				printf("Tablica pusta\n");
+			else 
+			{
+			sr = srednia(tab, n);
+			printf("Srednia = %g \n", sr);
+			}
+			break;
+		case 'x':
+			tab = czytaj_do_0(&n);
+			break;
+		case 'q':
+			printf("Koniec\n");
+			free(tab);
+			return;
+		default:
+			printf("Bledny klawisz\n");
+		}
+
+	}
+}
+
+void czytaj_n(int *n)
+{
+
+}
+void czytaj_tab(int *t, int n)
+{
+
+}
+void drukuj_tab(int *t, int n)
+{
+
+}
+int minimum(int *t, int n)
+{
+
+}
+int maximum(int *t, int n)
+{
+
+}
+double srednia(int *t, int n)
+{
+
+}
+int *czytaj_do_0(int *n)
+{
+
+}
