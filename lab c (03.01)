@@ -1,0 +1,89 @@
+#include <stdlib.h>
+#include <stdio.h>
+ 
+struct student
+{
+        char nazwisko[30];
+        char imie[20];
+        int numer;
+        double oceny[5];
+        double srednia;
+};
+ 
+void dopisz(char*nazwa);
+void drukuj(struct student s);
+void wydruk(char*nazwa);
+double minimum(char*nazwa);
+double maksimum(char*nazwa);
+int usun(char*nazwa);
+struct student srednia(struct student s);
+ 
+int main()
+{       
+        char f;
+        FILE *plik;     
+        plik = fopen("dane.txt", "a");
+        dopisz(plik);   
+        plik = fopen("dane.txt", "a");
+        dopisz(plik);   
+        plik = fopen("dane.txt","r");
+        wydruk(plik);
+        f=getch();
+        return 0;
+}
+ 
+void dopisz(char*nazwa)
+{                       
+ 
+        struct student s;
+        int i;
+        printf("podaj nazwisko\n");
+        scanf("%s", s.nazwisko);
+        printf("podaj imie\n");
+        scanf("%s", s.imie);
+        printf("podaj numer\n");
+        scanf("%d", &s.numer);
+        printf("podaj oceny\n");
+        for(i=0;i<5;i++)
+                {
+                        scanf("%lf", s.oceny+i);
+                }
+        s = srednia(s);
+        fwrite(&s, sizeof(struct student),1,nazwa);
+        fclose(nazwa);
+        
+}
+ 
+struct student srednia(struct student s)
+{
+        int i;
+        double k=0;
+        for(i=0;i<5;i++)
+                {
+                        k=k+*(s.oceny+i);
+                }
+        s.srednia=k/5;
+        return s;
+}
+ 
+void drukuj(struct student s)
+{       
+        int i;
+        printf("nazwisko: %s\n", s.nazwisko);
+        printf("imie: %s\n", s.imie);
+        printf("nr: %d\n", s.numer);
+        printf("oceny:\n");
+        for(i=0;i<5;i++)
+        {
+                printf("%lf ", *(s.oceny+i));
+        }
+        printf("srednia: %lf", s.srednia);
+}
+ 
+void wydruk(char*nazwa)
+{       
+        struct student s;
+        while(fread(&s, sizeof(struct student),1,nazwa)==1)
+        drukuj(s);
+        fclose(nazwa);
+}
